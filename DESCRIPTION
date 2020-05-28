@@ -1,0 +1,18 @@
+Package: wmms
+Title: Weighted Maximum Mean Subtrees
+Version: 0.0.0.9000
+Authors@R: c(
+  person(given = "Duncan", family = "Garmonsway", role = c("aut", "cre"),
+    email = "duncan.garmonsway@gmail.com"),
+  person(family = "Crown Copyright 2020", role="cph")
+  )
+Description: Find maximum-mean weighted subtrees by the algorithm in Carlson J.,
+    Eppstein D. (2006) The Weighted Maximum-Mean Subtree and Other Bicriterion
+    Subtree Problems. In: Arge L., Freivalds R. (eds) Algorithm Theory – SWAT
+    2006.  SWAT 2006. Lecture Notes in Computer Science, vol 4059. Springer,
+    Berlin, Heidelberg.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.0

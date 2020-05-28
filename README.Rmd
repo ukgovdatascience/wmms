@@ -1,0 +1,127 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# wmms
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+Prune a tree to be the most profitable possible subtree that is still connected
+to the root node.  If every node has two numeric values, `a` and `b`, the most
+profitable subtree will be the one where `sum(a) / sum(b)` over all remaining
+nodes is the maximum it could possibly be.  Minimising can be done by
+subtracting the `a` values from zero.
+
+This package implements the algorithm in Carlson J., Eppstein D. (2006) The
+Weighted Maximum-Mean Subtree and Other Bicriterion Subtree Problems. In: Arge
+L., Freivalds R. (eds) Algorithm Theory – SWAT 2006.  SWAT 2006. Lecture Notes
+in Computer Science, vol 4059. Springer, Berlin, Heidelberg.
+
+Pure base R is used, yet the package is reasonably quick and has been used to
+find optimal trees for every LSOA11 (Lower Layer Super Output Area) in Wales in
+less than a minute on a standard laptop.
+
+## Installation
+
+You can install the development version from GitHub with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("ukgovdatascience/wmms")
+```
+
+## Example
+
+Here is an example of building a broadband network out from an existing node.
+The cost of extending the network to each node is a function of its distance
+from its parent.  We want to minimise the cost of connecting each node, when
+averaged over all the nodes that are connected.
+
+In this graph, the root node in the centre has no value, because it already
+exists.  The node beside it has the value `10`, because its distance from the
+root is `10`.  The `b` value of all nodes is `1`, so that the algorithm will
+find an unweighted mean.
+
+```{r ref.label='plot-original', echo = FALSE, fig.width = 8, fig.height = 8}
+```
+
+Create this graph by making a data frame of edges, one row per edge, with the
+columns `from` and `to` referring to node IDs, and `a` and `b` giving the values
+of the `to` node.
+
+(One way to obtain such an edgelist from geographical coordinates of each node
+is the [`emstreeR`](https://cran.r-project.org/package=emstreeR) package, which
+calculates a Euclidean Minimum Spanning Tree.)
+
+```{r create-graph}
+library(wmms)
+
+# This graph was invented by Jo Keefe at the UK Department for Digital, Culture,
+# Media and Sport.
+edges <- data.frame(from = c(1, rep(2:7, each = 5)),
+                    to = c(2, 3:32),
+                    a = c(10, rep(1:5, 6)),
+                    b = 1)
+edges
+```
+
+```{r plot-original, include = FALSE}
+library(igraph)
+
+nodes <- edges[, c("to", "a", "b")]
+nodes <- rbind(nodes, data.frame(to = 1, a = NA, b = NA))
+
+g <- igraph::graph_from_data_frame(edges, vertices = nodes)
+
+plot(g, vertex.label = nodes$a)
+```
+
+Now prune the tree to obtain the optimum possible average value over all nodes.
+In this example, the values `a` are made negative, so that `a/b` will be
+minimised rather than maximised.
+
+```{r maximise}
+root_id <- 1
+
+edges$a <- 0 - edges$a
+
+maximum <- maximum_average_values(edges, root_id)
+
+maximum$a <- 0 - maximum$a
+maximum$value <- 0 - maximum$value
+
+maximum
+```
+
+Plot the maximum subtree, and all subtrees connected to it.  The blue nodes are
+part of the maximum subtree.  Their average cost is 2.46, which is lower than
+the original value of the top node (10).  The cost of appending any other nodes
+is higher than 2.46.  The pink nodes comprise another subtree of nodes that have
+been averaged together, to achieve the value 2.67, which is lower than the
+original value of their top node (5).
+
+```{r plot-optimum, echo = FALSE, fig.width = 8, fig.height = 8}
+nodes <- maximum[, c("to", "a", "b", "ancestor", "value")]
+nodes$value <- sprintf("%.2f", nodes$value)
+nodes <- rbind(nodes,
+               data.frame(to = 1, a = NA, b = NA, ancestor = NA, value = NA))
+nodes$colour = ifelse(nodes$ancestor %in% c(2, 7), nodes$ancestor, NA)
+
+g <- igraph::graph_from_data_frame(maximum, vertices = nodes)
+
+plot(g,
+     vertex.label = nodes$value,
+     vertex.color = nodes$colour)
+```

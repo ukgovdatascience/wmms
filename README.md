@@ -156,4 +156,4 @@ another subtree of nodes that have been averaged together, to achieve
 the value 2.67, which is lower than the original value of their top node
 (5).
 
-<img src="man/figures/README-plot-optimum-1.png" width="100%" />
+<img src="man/figures/README-plot-optimum-1.png" width="600" height="600" />

@@ -54,7 +54,7 @@ exists.  The node beside it has the value `10`, because its distance from the
 root is `10`.  The `b` value of all nodes is `1`, so that the algorithm will
 find an unweighted mean.
 
-```{r ref.label='plot-original', echo = FALSE, fig.width = 8, fig.height = 8}
+```{r ref.label='plot-original', echo = FALSE}
 ```
 
 Create this graph by making a data frame of edges, one row per edge, with the
@@ -77,7 +77,7 @@ edges <- data.frame(from = c(1, rep(2:7, each = 5)),
 edges
 ```
 
-```{r plot-original, include = FALSE}
+```{r plot-original, include = FALSE, fig.width = 8, fig.height = 8, out.width = 600, out.height = 600}
 library(igraph)
 
 nodes <- edges[, c("to", "a", "b")]
@@ -112,7 +112,7 @@ is higher than 2.46.  The pink nodes comprise another subtree of nodes that have
 been averaged together, to achieve the value 2.67, which is lower than the
 original value of their top node (5).
 
-```{r plot-optimum, echo = FALSE, fig.width = 8, fig.height = 8}
+```{r plot-optimum, echo = FALSE, fig.width = 8, fig.height = 8, out.width = 600, out.height = 600}
 nodes <- maximum[, c("to", "a", "b", "ancestor", "value")]
 nodes$value <- sprintf("%.2f", nodes$value)
 nodes <- rbind(nodes,

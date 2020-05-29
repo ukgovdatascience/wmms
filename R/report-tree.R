@@ -3,7 +3,7 @@
 #' Takes the directed edges from [directed()], and the maximised `tree`, and
 #' appends the tree values to the edges. The columns `from` and `to` are
 #' converted back to `numeric`, which is how they would have been when they were
-#' given to `maximum_average_values()`.
+#' given to `weighted_maximum_mean_subtrees()`.
 #'
 #' @param `edges` (`data frame`) Originally created by [directed()].
 #' @param `tree` (`environment`) Originally created by [tree_from_edges()].

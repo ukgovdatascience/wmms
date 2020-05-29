@@ -27,6 +27,8 @@ node remains.  The optimum tree can either be reconstructed by setting the
 bounds equal to the optimum value and estimating the median once more.
 }
 \section{Overall algorithm}{
+A worked example is in a Google Sheet:
+https://docs.google.com/spreadsheets/d/1wCiS0IU6EDkvjXVjRP_MwScVqtBqxqgLj3ODDsErRJ4.
 \enumerate{
 \item Set the \code{bounds} to \verb{-Infinity, +Infinity}
 \item Calculate the \verb{median value} of all nodes that are between the \code{bounds}

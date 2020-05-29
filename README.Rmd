@@ -98,7 +98,7 @@ root_id <- 1
 
 edges$a <- 0 - edges$a
 
-maximum <- maximum_average_values(edges, root_id)
+maximum <- weighted_maximum_mean_subtrees(edges, root_id)
 
 maximum$a <- 0 - maximum$a
 maximum$value <- 0 - maximum$value

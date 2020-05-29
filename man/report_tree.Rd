@@ -28,5 +28,5 @@ averaged together by \code{sum(a) / sum(b)}.
 Takes the directed edges from \code{\link[=directed]{directed()}}, and the maximised \code{tree}, and
 appends the tree values to the edges. The columns \code{from} and \code{to} are
 converted back to \code{numeric}, which is how they would have been when they were
-given to \code{maximum_average_values()}.
+given to \code{weighted_maximum_mean_subtrees()}.
 }

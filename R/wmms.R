@@ -34,7 +34,7 @@
 #'   interpreted as edge values again.
 #' @export
 
-maximum_average_values <- function(edges, root_id) {
+weighted_maximum_mean_subtrees <- function(edges, root_id) {
   # Convert root_id to character to use as an environment name.
   root_id <- as.character(root_id)
   # Convert the edgelist into a tree of nodes, represented as environments.
@@ -68,7 +68,7 @@ maximum_average_values <- function(edges, root_id) {
     # If it is the first node of a subtree that hasn't yet been optimised, and
     # is not a leaf.
     if (!node$merged && length(node$subtree_dfs$dfs) != 1L) {
-      maximum_average_value(tree = tree, node$subtree_dfs)
+      weighted_maximum_mean_subtree(tree = tree, node$subtree_dfs)
     }
   }
   # Propagate node values down from the children of the root.
@@ -81,8 +81,8 @@ maximum_average_values <- function(edges, root_id) {
 #' Maximise one subtree
 #'
 #' After preparing the tree by making it directed and finding a depth-first
-#' search order, [maximum_average_values()] applies this function recursively to
-#' nodes that haven't yet been merged into an optimum subtree.
+#' search order, [weighted_maximum_mean_subtrees()] applies this function
+#' recursively to nodes that haven't yet been merged into an optimum subtree.
 #'
 #' @param `dfs_env` (`environment`) An environment containing an object called
 #'   `dfs` that is a named list of `NULL` values, where the names are IDs of
@@ -93,7 +93,7 @@ maximum_average_values <- function(edges, root_id) {
 #' @return
 #' There is no return value.  The `tree` is modified in place.
 
-maximum_average_value <- function(tree, dfs_env) {
+weighted_maximum_mean_subtree <- function(tree, dfs_env) {
   # (re)set the nodes in the subtree to their original state.
   restore_subtree(tree, names(dfs_env$dfs))
   # The algorithm searches for the true value between two bounds.  Begin with

@@ -37,7 +37,7 @@ merge_child_into_parent <- function(child, dfs_env) {
   # Remove the child from its parent's children, and from the depth-first
   # search.
   .Internal(remove(child$id, parent$children, FALSE))
-  dfs_env$dfs[[child$id]] <- NULL
+  dfs_env$dfs[[child$id]] <- FALSE
   # Mark the child as merged
   child$merged <- TRUE
   NULL

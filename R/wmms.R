@@ -101,8 +101,9 @@ weighted_maximum_mean_subtree <- function(tree, dfs_env) {
   bounds <- list(low = -Inf, high = Inf)
   # Then loop until the maximum is achieved, which will be when the root has
   # zero children.
-  while (length(dfs_env$dfs) > 1L) { # At 1, only the subtree's root is left.
-    dfs_order <- names(dfs_env$dfs)
+  while (length(dfs_env$dfs[dfs_env$dfs]) > 1L) { # At 1, only the subtree's root is left.
+    dfs <- dfs_env$dfs
+    dfs_order <- names(dfs[dfs])
     # Estimate the true maximum of sum(a)/sum(b) of a rooted subtree as the
     # median of the a/b values of each node, discarding any a/b that is
     # outside the bounds.

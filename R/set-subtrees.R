@@ -19,10 +19,10 @@
 set_subtrees <- function(tree, dfs_order) {
   # For each node, create an empty list in an environment, where the list will
   # store IDs of descendants.
-  empty_list <- list()
+  empty_logical <- .Internal(vector("logical", 0L))
   for (node in as.list(tree, ordered = FALSE)) {
     subtree_dfs <- new.env(hash = FALSE) # Hash not worthwhile for most nodes
-    subtree_dfs$dfs <- empty_list
+    subtree_dfs$dfs <- empty_logical
     node$subtree_dfs <- subtree_dfs
   }
   # For each node, leaves first, prepend it to its own subtree, then prepend its
@@ -30,7 +30,7 @@ set_subtrees <- function(tree, dfs_order) {
   for (node_id in rev(dfs_order)) {
     node <- tree[[node_id]]
     subtree_dfs <- node$subtree_dfs
-    self <- setNames(.Internal(vector("list", 1)), node_id) # named NULL
+    self <- setNames(!.Internal(vector("logical", 1L)), node_id) # FALSE
     # Prepend self to own subtree
     subtree_dfs$dfs <- c(self, subtree_dfs$dfs)
     # Prepend subtree to parent's subtree

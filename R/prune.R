@@ -48,7 +48,8 @@
 #' There is no return value. The tree is modified in place.
 
 prune <- function(tree, bounds, dfs_env) {
-  dfs_order <- names(dfs_env$dfs)
+  dfs <- dfs_env$dfs
+  dfs_order <- names(dfs[dfs])
   # First: prune/merge children of the root of this subtree
   for (node_id in rev(dfs_order[-1])) {
     node <- tree[[node_id]]
@@ -74,7 +75,7 @@ prune <- function(tree, bounds, dfs_env) {
       if (n_children == 0L) {
         # Node is (now) a leaf, so prune by removing from parent's children
         .Internal(remove(node$id, node$parent$children, FALSE))
-        dfs_env$dfs[[node$id]] <- NULL
+        dfs_env$dfs[[node$id]] <- FALSE
         next
       }
       # Node isn't a leaf, so skip

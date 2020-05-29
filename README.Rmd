@@ -125,3 +125,10 @@ plot(g,
      vertex.label = nodes$value,
      vertex.color = nodes$colour)
 ```
+
+## Algorithm
+
+A worked example is in a [Google
+Sheet](https://docs.google.com/spreadsheets/d/1wCiS0IU6EDkvjXVjRP_MwScVqtBqxqgLj3ODDsErRJ4).
+
+It is also explained in the docs `?algorithm` in the file `R/algorithm.R`.

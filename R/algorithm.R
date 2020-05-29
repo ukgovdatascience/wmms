@@ -10,6 +10,9 @@
 #' @details
 #' # Overall algorithm
 #'
+#' A worked example is in a Google Sheet:
+#' https://docs.google.com/spreadsheets/d/1wCiS0IU6EDkvjXVjRP_MwScVqtBqxqgLj3ODDsErRJ4.
+#'
 #' 1. Set the `bounds` to `-Infinity, +Infinity`
 #' 1. Calculate the `median value` of all nodes that are between the `bounds`
 #'    (inclusive). A node's value is `a / b` of that node, excluding any

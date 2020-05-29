@@ -157,3 +157,11 @@ the value 2.67, which is lower than the original value of their top node
 (5).
 
 <img src="man/figures/README-plot-optimum-1.png" width="600" height="600" />
+
+## Algorithm
+
+A worked example is in a [Google
+Sheet](https://docs.google.com/spreadsheets/d/1wCiS0IU6EDkvjXVjRP_MwScVqtBqxqgLj3ODDsErRJ4).
+
+It is also explained in the docs `?algorithm` in the file
+`R/algorithm.R`.

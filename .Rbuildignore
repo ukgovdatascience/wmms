@@ -2,3 +2,4 @@
 ^README\.Rmd$
 ^temp\.R$
 ^README\.html$
+^README_cache$

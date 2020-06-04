@@ -29,7 +29,7 @@ directed_depth_first <- function(tree, edges, root_id) {
   stack[[1]] <- tree[[root_id]] # Begin by putting the root node into the stack
   n <- nrow(edges) + 1L
   dfs_order <- character(n) # Node IDs in depth-first preorder
-  parents <- character(n)   # A lookup vector of parents of nodes
+  parents <- character(n) # A lookup vector of parents of nodes
   i <- 0L
   # Walk the tree
   while (length(stack) > 0L) {

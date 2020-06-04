@@ -10,7 +10,7 @@ median_fast <- function(x) {
   n <- length(x)
   half <- (n + 1L) %/% 2L
   half_bounds <- half + 0L:1L
-  if (n%%2L == 1L) {
+  if (n %% 2L == 1L) {
     sort_fast(x)[half]
   } else {
     mean_fast(sort_partial_fast(x, partial = half_bounds)[half_bounds])

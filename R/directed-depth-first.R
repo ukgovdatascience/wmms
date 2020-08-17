@@ -20,7 +20,7 @@
 #' A list containing `edges` with some values of the `to` and `from` columns
 #' exchanged so that the graph is directed, and `dfs_order`, which is a vector
 #' of node IDs in the order that they would be visited in a depth-first search.
-#' the `tree` is modified in place, so is not retured.
+#' the `tree` is modified in place, so is not returned.
 
 directed_depth_first <- function(tree, edges, root_id) {
   # Prepare to walk the tree from the root downwards

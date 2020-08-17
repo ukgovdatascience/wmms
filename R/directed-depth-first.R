@@ -43,14 +43,13 @@ directed_depth_first <- function(tree, edges, root_id) {
     parents[i] <- node$original_parent$id
     # Remove the node from the 'children' of any children, and assign itself as
     # their parent instead.
-    original_children <- node$original_children
+    original_children <- as.list(node$original_children, sort = FALSE)
     for (child in as.list(original_children)) {
       .Internal(remove(node$id, child$original_children, FALSE))
       child$original_parent <- node
     }
-    children_list <- as.list(node$original_children, sort = FALSE)
     # Append any children to the stack
-    stack <- c(children_list, stack)
+    stack <- c(original_children, stack)
   }
   # Make a lookup vector of parents of nodes. The value is the id of the parent,
   # and the name is the id of the child.

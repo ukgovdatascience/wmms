@@ -25,7 +25,7 @@ median_value <- function(tree, bounds, dfs_order) {
   for (node_id in rev(dfs_order)) {
     node <- tree[[node_id]]
     value <- node$a / node$b
-    if (value >= bounds$low || value <= bounds$high) {
+    if (value >= bounds$low && value <= bounds$high) {
       i <- i + 1L
       values[i] <- value
     }

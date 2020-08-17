@@ -56,8 +56,10 @@ tree_from_edges <- function(edges) {
   for (i in seq_along(from)) {
     from_id <- from[i]
     to_id <- to[i]
-    tree[[from_id]]$original_children[[to_id]] <- tree[[to_id]]
-    tree[[to_id]]$original_children[[from_id]] <- tree[[from_id]]
+    parent = tree[[from_id]]
+    child = tree[[to_id]]
+    parent$original_children[[to_id]] <- child
+    child$original_children[[from_id]] <- parent
   }
   tree
 }

@@ -44,7 +44,7 @@ directed_depth_first <- function(tree, edges, root_id) {
     # Remove the node from the 'children' of any children, and assign itself as
     # their parent instead.
     original_children <- as.list(node$original_children, sort = FALSE)
-    for (child in as.list(original_children)) {
+    for (child in original_children) {
       .Internal(remove(node$id, child$original_children, FALSE))
       child$original_parent <- node
     }

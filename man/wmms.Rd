@@ -37,24 +37,29 @@ children.  The first time this step is done, all the nodes will be
 included in the median because the bounds will be \verb{-Infinity, +Infinity}.
 \item Modify node values temporarily, to decide how to narrow the bounds.  In
 post-order (leaves first):
-a. Calculate the node value \code{a / b}.
-a. If the node value is lower than the \verb{median value}, skip to the next
+\enumerate{
+\item Calculate the node value \code{a / b}.
+\item If the node value is lower than the \verb{median value}, skip to the next
 node.
-a. Add the node's \code{a} and \code{b} to the parent node's \code{a} and \code{b}.
+\item Add the node's \code{a} and \code{b} to the parent node's \code{a} and \code{b}.
+}
 \item Compare the \verb{greedy value} of the root node \code{a / b}, obtained by the
 previous step, with the \code{bounds} and the \verb{median value}.
-a. If the \verb{greedy value} is above the \verb{lower bound} then raise the \verb{lower bound} to the \verb{greedy value}.
-a. If the \verb{greedy value} is below the \verb{median value} then lower the \verb{upper bound} to the \verb{median value}.
+\enumerate{
+\item If the \verb{greedy value} is above the \verb{lower bound} then raise the \verb{lower   bound} to the \verb{greedy value}.
+\item If the \verb{greedy value} is below the \verb{median value} then lower the \verb{upper   bound} to the \verb{median value}.
+}
 \item Undo any temporary modifications made to node values in the previous
 steps.
 \item If the \code{bounds} are equal to each other, stop.  This rule is necessary
 because otherwise, when this is the case, no nodes will be pruned, so the
 other stopping rule (only the root node remains) will never be triggered.
 \item Prune the tree permanently.  In post-order (leaves first):
-a. If the node's value \code{a / b} is below the \verb{lower bound}, and the node is
+\enumerate{
+\item If the node's value \code{a / b} is below the \verb{lower bound}, and the node is
 a leaf (has no children), then prune it.  It can't possibly be in the
 optimum tree.
-a. If the node's value \code{a / b} is below the \verb{lower bound}, and the node has
+\item If the node's value \code{a / b} is below the \verb{lower bound}, and the node has
 exactly one child, then add the child's \code{a} and \code{b} to the this node's
 \code{a} and \code{b}, adopt the children of the child to become children of this
 node, and prune the child.  Then return to the previous step with the
@@ -63,15 +68,16 @@ node might now be a leaf (have no children).  We can do this because
 this node and its child will either both be in the optimum tree, or both
 be pruned eventually, so they might as well be combined to save
 computating them individually.
-a. If the node's value \code{a / b} is equal to or above the \verb{upper bound}, then
+\item If the node's value \code{a / b} is equal to or above the \verb{upper bound}, then
 add this node's \code{a} and \code{b} to its parent's \code{a} and \code{b}, make this
 node's children into children of this node's parent, and finally prune
 this node.  We can do this because we know that this node will be
 included in the optimum tree as long as its parent is included too, so
 they might as well be combined to save computating them individually.
-a. If none of the previous rules apply then keep the node in the tree for
+\item If none of the previous rules apply then keep the node in the tree for
 now.  It might be combined with an ancestor later, when applying the
 above rules to its ancestors.
+}
 \item If more than one node remains, return to the second step, which calculates
 the \verb{median value} of all nodes that are between the \code{bounds} (inclusive).
 \item If only one node remains (the root node) then stop.  Its value \code{a / b} is

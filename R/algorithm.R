@@ -20,15 +20,15 @@
 #'    included in the median because the bounds will be `-Infinity, +Infinity`.
 #' 1. Modify node values temporarily, to decide how to narrow the bounds.  In
 #'    post-order (leaves first):
-#'   a. Calculate the node value `a / b`.
-#'   a. If the node value is lower than the `median value`, skip to the next
+#'    1. Calculate the node value `a / b`.
+#'    1. If the node value is lower than the `median value`, skip to the next
 #'      node.
-#'   a. Add the node's `a` and `b` to the parent node's `a` and `b`.
+#'    1. Add the node's `a` and `b` to the parent node's `a` and `b`.
 #' 1. Compare the `greedy value` of the root node `a / b`, obtained by the
 #'    previous step, with the `bounds` and the `median value`.
-#'   a. If the `greedy value` is above the `lower bound` then raise the `lower
+#'    1. If the `greedy value` is above the `lower bound` then raise the `lower
 #'      bound` to the `greedy value`.
-#'   a. If the `greedy value` is below the `median value` then lower the `upper
+#'    1. If the `greedy value` is below the `median value` then lower the `upper
 #'      bound` to the `median value`.
 #' 1. Undo any temporary modifications made to node values in the previous
 #'    steps.
@@ -36,10 +36,10 @@
 #'    because otherwise, when this is the case, no nodes will be pruned, so the
 #'    other stopping rule (only the root node remains) will never be triggered.
 #' 1. Prune the tree permanently.  In post-order (leaves first):
-#'   a. If the node's value `a / b` is below the `lower bound`, and the node is
+#'    1. If the node's value `a / b` is below the `lower bound`, and the node is
 #'      a leaf (has no children), then prune it.  It can't possibly be in the
 #'      optimum tree.
-#'   a. If the node's value `a / b` is below the `lower bound`, and the node has
+#'    1. If the node's value `a / b` is below the `lower bound`, and the node has
 #'      exactly one child, then add the child's `a` and `b` to the this node's
 #'      `a` and `b`, adopt the children of the child to become children of this
 #'      node, and prune the child.  Then return to the previous step with the
@@ -48,13 +48,13 @@
 #'      this node and its child will either both be in the optimum tree, or both
 #'      be pruned eventually, so they might as well be combined to save
 #'      computating them individually.
-#'   a. If the node's value `a / b` is equal to or above the `upper bound`, then
+#'    1. If the node's value `a / b` is equal to or above the `upper bound`, then
 #'      add this node's `a` and `b` to its parent's `a` and `b`, make this
 #'      node's children into children of this node's parent, and finally prune
 #'      this node.  We can do this because we know that this node will be
 #'      included in the optimum tree as long as its parent is included too, so
 #'      they might as well be combined to save computating them individually.
-#'   a. If none of the previous rules apply then keep the node in the tree for
+#'    1. If none of the previous rules apply then keep the node in the tree for
 #'      now.  It might be combined with an ancestor later, when applying the
 #'      above rules to its ancestors.
 #' 1. If more than one node remains, return to the second step, which calculates

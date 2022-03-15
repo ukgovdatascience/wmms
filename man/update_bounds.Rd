@@ -11,8 +11,8 @@ update_bounds(bounds, estimate, value)
 true maximum value of the tree is sought.  The bounds will initially be
 \code{list(low = -Inf, high = Inf)}.}
 
-\item{`estimate`}{(\code{numeric}) An estimate of the maximum possible value of the
-tree, from \code{\link[=median_value]{median_value()}}.}
+\item{`estimate`}{(\code{numeric}) An estimate of the maximum possible value of
+the tree, from \code{\link[=median_value]{median_value()}}.}
 
 \item{`value`}{(\code{numeric}) The value of the tree when greedily pruned by
 removing nodes with values below \code{estimate}, from \code{\link[=value]{value()}}.}
@@ -33,10 +33,10 @@ in a single call to \code{\link[=value]{value()}}.
 
 Depending on the \code{value} relative to the \code{estimate}:
 \itemize{
-\item The lower bound can always be raised to the value of the (temporarily) pruned
-tree.
+\item The lower bound can always be raised to the value of the (temporarily)
+pruned tree.
 \item If the value of the (temporarily) pruned tree is equal to or below the
-estimate, then the upper bound is lowered to the estimate, because it can be
-proved that the estimate is an upper bound for the true maximum.
+estimate, then the upper bound is lowered to the estimate, because it can
+be proved that the estimate is an upper bound for the true maximum.
 }
 }

@@ -21,7 +21,7 @@ by the edge.  Must be the same as was used by \code{\link[=tree_from_edges]{tree
 A list containing \code{edges} with some values of the \code{to} and \code{from} columns
 exchanged so that the graph is directed, and \code{dfs_order}, which is a vector
 of node IDs in the order that they would be visited in a depth-first search.
-the \code{tree} is modified in place, so is not retured.
+the \code{tree} is modified in place, so is not returned.
 }
 \description{
 Euclidean Minimum Spanning Tree (EMST) edgelists from
